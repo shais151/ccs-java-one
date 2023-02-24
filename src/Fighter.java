@@ -3,33 +3,33 @@ public class Fighter {
     // Field Declarations
     // TODO:  Put the correct specifiers for each declaration.
 
-    final String name;
+    private final String name;
 
-    final String type;
+    public final String type;
 
-    final int skill;
+    public final int skill;
 
     int stamina;
 
-    final GameEngine theGameEngine;
+    private final GameEngine theGameEngine;
 
     static final int DAMAGE_VALUE = 2;
 
     /**
-     * Construct a figher, given a name, type, attributes and reference to the game engine.
+     * Construct a fighter, given a name, type, attributes and reference to the game engine.
      */
     Fighter(String name, String type, int skill, int stamina, GameEngine theGameEngine) {
-
         this.name = name;
         this.type = type;
         this.skill = skill;
         this.stamina = stamina;
         this.theGameEngine = theGameEngine;
-
     }
 
     // TODO:  Reduce the fighter's stamina accordingly
-    public void takeDamage(int damage) {}
+    public void takeDamage(int damage) {
+        this.stamina -= damage;
+    }
 
     // TODO:  Return the number of damage points to be inflicted on opponent
     public int calculateDamage() {
@@ -44,7 +44,7 @@ public class Fighter {
      whose stamina is reduced by two (or set to zero if it is currently set to one).
     * */
     public int calculateAttackScore() {
-        return 0;
+        return this.theGameEngine.rollDice() + this.theGameEngine.rollDice() + this.skill;
     }
 
     public String getName() {
