@@ -5,15 +5,15 @@ public class Fighter {
 
     private final String name;
 
-    public final String type;
+    private final String type;
 
-    public final int skill;
+    private final int skill;
 
-    int stamina;
+    private int stamina;
 
     private final GameEngine theGameEngine;
 
-    static final int DAMAGE_VALUE = 2;
+    public static final int DAMAGE_VALUE = 2;
 
     /**
      * Construct a fighter, given a name, type, attributes and reference to the game engine.
@@ -26,14 +26,15 @@ public class Fighter {
         this.theGameEngine = theGameEngine;
     }
 
-    // TODO:  Reduce the fighter's stamina accordingly
     public void takeDamage(int damage) {
-        this.stamina -= damage;
+        if (!isDead()) {
+            this.stamina -= damage;
+        }
     }
 
     // TODO:  Return the number of damage points to be inflicted on opponent
     public int calculateDamage() {
-        return 0;
+        return DAMAGE_VALUE;
     }
 
     // TODO: Calculate an attack score for the fighter using the procedure:
@@ -44,7 +45,7 @@ public class Fighter {
      whose stamina is reduced by two (or set to zero if it is currently set to one).
     * */
     public int calculateAttackScore() {
-        return this.theGameEngine.rollDice() + this.theGameEngine.rollDice() + this.skill;
+        return theGameEngine.rollDice() + theGameEngine.rollDice() + skill;
     }
 
     public String getName() {
@@ -58,7 +59,7 @@ public class Fighter {
     }
 
     public boolean isDead() {
-        return stamina == 0;
+        return stamina <= 0;
     }
     // TODO: Answer this question.
     // Why not simply have a boolean that specifies whether the fighter is dead or not?
